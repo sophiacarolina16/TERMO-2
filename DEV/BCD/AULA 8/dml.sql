@@ -87,7 +87,7 @@ INSERT INTO cliente (nome, email, telefone, cidade, ativo) VALUES
 ('Vinicius OlhoAzul', 'viniciusa@email.com', '1999999914', 'Chicago', TRUE);
 
 
-SELECT * FROM pedido;
+SELECT * FROM   pagamento;
 
 INSERT INTO categoria (nome) VALUES
 ('Cafe'), ('Bebidas Quentes'), ('Bebidas Frias'), ('Doces'), ('Salgados'), ('Combo');
@@ -111,4 +111,13 @@ INSERT INTO item_pedido (id_pedido, id_produto, quantidade, preco_unitario, obse
 (2, 2, 1, 6.00, 'Quente'),
 (3, 3, 1, 7.00, 'Com recheio'),
 (4, 4, 1, 10.00, 'Sem recheio');
+
+INSERT INTO forma_pagamento (nome) VALUES 
+('Dinheiro'), ('Cartão de Crédito'), ('Cartão de Débito'), ('Pix');
+
+INSERT INTO pagamento (id_pedido, id_forma_pagamento, valor, data_pagamento) VALUES 
+(1, 1, 10.00, '2026-09-14 10:05:00'),
+(2, 2, 6.00, '2026-09-14 11:05:00'),
+(3, 3, 7.00, '2026-09-14 12:05:00'),
+(4, 4, 25.00, '2026-09-14 13:05:00');
 

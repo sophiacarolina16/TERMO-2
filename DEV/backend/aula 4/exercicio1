@@ -1,0 +1,27 @@
+const entrada = require ("readline-sync");
+
+console.log("Acesso ao laboratorio");
+
+const idade = entrada.questionInt("Digite a idade do aluno: ");
+
+const autorizacao = entrada.question(
+    "tem Autorizacao?(S/N):"
+
+).toUpperCase();
+
+const autorizacao = entrada.question(
+    "Esta acompanhado por um professor?"
+).toUpperCase();
+
+
+if (
+    (idade >= 16 && autorizacao === "S")  ||
+    acompanhado === "S"
+) {
+    consolde.log("Acesso Liberado");
+} else {
+    consolde.log("Acesso Negado");
+}
+
+consolde.log("\n Pressionado ENTER para fechar...");
+entrada.question();

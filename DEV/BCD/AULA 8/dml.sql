@@ -87,7 +87,7 @@ INSERT INTO cliente (nome, email, telefone, cidade, ativo) VALUES
 ('Vinicius OlhoAzul', 'viniciusa@email.com', '1999999914', 'Chicago', TRUE);
 
 
-SELECT * FROM   pagamento;
+SELECT * FROM   cliente;
 
 INSERT INTO categoria (nome) VALUES
 ('Cafe'), ('Bebidas Quentes'), ('Bebidas Frias'), ('Doces'), ('Salgados'), ('Combo');
@@ -106,6 +106,9 @@ INSERT INTO pedido (id_cliente, data_pedido, status_pedido, valor_total) VALUES
 (3, '2026-09-14 12:00:00', 'FINALIZADO', 7.00),
 (4, '2026-09-14 13:00:00', 'CANCELADO', 25.00);
 
+SET @pedido = LAST_INSERT_ID();
+SELECT @pedido;
+
 INSERT INTO item_pedido (id_pedido, id_produto, quantidade, preco_unitario, observacao) VALUES 
 (1, 1, 2, 5.00, 'Sem açúcar'),
 (2, 2, 1, 6.00, 'Quente'),
@@ -121,3 +124,46 @@ INSERT INTO pagamento (id_pedido, id_forma_pagamento, valor, data_pagamento) VAL
 (3, 3, 7.00, '2026-09-14 12:05:00'),
 (4, 4, 25.00, '2026-09-14 13:05:00');
 
+--Atualização e modificações de dados
+
+-- Experimento 1
+UPDATE cliente SET telefone = '19999999801' WHERE id_cliente = 11;
+
+-- Experimento 2
+UPDATE produto SET preco = 1.00;
+-- nunca fazer um update sem where, pois ele vai atualizar todos os registros da tabela
+
+-- Experimento 3
+update cliente
+SET telefone = '1992000000'
+cidade= 'Valinhos'
+WHERE id_cliente_= 9;
+
+
+experimento 4
+UPDATE produto
+SET preco = 1.05
+WHERE id_produto = 1;
+
+experimento 5
+UPDATE produto
+SET preco = CASE 
+    WHEN preco < 10 THEN preco * 1.10
+    ELSE preco * 1.05
+END
+WHERE ativo = TRUE;
+
+
+--APAGAR DADOS DO BANCO DE DADOS
+
+--exp1
+DELETE FROM cliente WHERE id_cliente = 9;
+
+--exp2
+DELETE FROM cliente WHERE ativo = FALSE;
+
+--exp3
+DELETE FROM cliente WHERE cidade = 'Chicago';
+
+--exp4
+UPDATE cliente SET ativo = FALSE WHERE id_cliente = 10;

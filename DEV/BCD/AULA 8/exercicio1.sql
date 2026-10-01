@@ -1,5 +1,7 @@
 -- Active: 1788436126633@@127.0.0.1@3308@smartcoffee_dml_sophia
 
+
+--Parte A
 --cadastre dois novos clientes, cadastre uma nova categoria Especiais da Casa, insira um dos clientes cadastrados, use last_insert_id() para inserir pelo menos dois itens no pedido.
 
 DROP DATABASE IF EXISTS smartcoffee_dml_sophia;
@@ -54,13 +56,17 @@ CREATE TABLE item_pedido (
 INSERT INTO cliente (nome, email, telefone, cidade) VALUES
 ('Ana Silva', 'ana.silva@email.com', '11999999999', 'São Paulo'),
 ('Pedro Santos', 'pedro.santos@email.com', NULL, 'Belo Horizonte'),
+('Julia Costa', 'julia.costa@email.com', '21988888888', 'Rio de Janeiro'), 
+('Carlos Souza', 'carlos.souza@email.com', '31977777777', 'Belo Horizonte'); -- julia carlos novo
+
+INSERT INTO categoria (nome) VALUES ('bebida quente'), ('bebida gelada'), ('salgado'), ('doces'),('Especiais da Casa');
 
 
-
-
-INSERT INTO produto (nome, descricao, preco, id_categoria) VALUES 
-('Café Trufado', 'Café espresso', 14.50, 1),
-('Cappuccino de Nutella', 'Cappuccino cremoso', 12.00, 1);
+INSERT INTO produto (nome, descricao, id_categoria, preco) VALUES 
+('Capuchino', 'Café com leite vaporizado e espuma de leite', 1, 5.00),
+('Soda Italiana de Maca verde', 'Agua gaseificada com licor de maca verde', 2, 10.00),
+('Pao de queijo', 'Pao de queijo tradicional', 3, 7.00),
+('Tapioca romeu e julieta', 'Tapioca com recheio de goiabada e queijo', 4, 10.00);
 
 
 INSERT INTO pedido (id_cliente, valor_total, status_pedido) 
@@ -71,6 +77,7 @@ INSERT INTO item_pedido (id_pedido, id_produto, quantidade, preco_unitario, obse
 (LAST_INSERT_ID(), 1, 1, 14.50, 'Sem açúcar'),
 (LAST_INSERT_ID(), 2, 1, 12.00, 'Bem quente');
 
+
 SELECT * FROM cliente;
 SELECT * FROM categoria;
 SELECT * FROM produto;
@@ -80,4 +87,33 @@ SELECT * FROM item_pedido;
 
 
 --Parte B
---Corrija o telefone de um dos clientes criados, altere a cidade e telefone de outro cliente em um unico comando, aumente em 8% os preços dos produtos da categoria criada, altere o status do novo
+--Corrija o telefone de um dos clientes criados, altere a cidade e telefone de outro cliente em um unico comando, aumente em 8% os preços dos produtos da categoria criada, altere o status do novo pedidio para PREPARANDO, atualiza valor total do pedido para refletir os itens adcionados, desative um produto utilizando exclusão logica
+
+UPDATE cliente SET telefone = '700000000' WHERE id_cliente = 3;
+
+UPDATE cliente SET cidade = 'Miami' WHERE id_cliente = 4;
+UPDATE cliente SET telefone = '900000000' WHERE id_cliente = 4;
+
+UPDATE produto SET preco = preco * 1.08 WHERE id_categoria = 5;
+
+UPDATE pedido SET status_pedido = "PREPARANDO" WHERE id_pedido =1;
+UPDATE pedido SET valor_total = 5.00 WHERE id_pedido =1;
+
+UPDATE produto SET ativo = FALSE WHERE id_produto = 4;
+
+--Parte C
+--Crie um cliente de teste que não possuia pedidos e depois exclua-o, tente excluir um cliente que possui pedidos e registre o que aconteceu, explique porque a FK protegeu o banco, crie uma categoria de teste sem produtos e depois remova-a.
+
+INSERT INTO cliente (nome, email, telefone, cidade) 
+VALUES ('Cliente Teste', 'teste@gmail.com', '11000000000', 'São Paulo');
+
+DELETE FROM cliente WHERE email = 'teste@gmail.com';
+
+DELETE FROM cliente WHERE id_cliente = 5;
+
+INSERT INTO categoria (nome) VALUES ('Categoria Temporaria');
+
+DELETE FROM categoria WHERE nome = 'Categoria Temporaria';
+
+
+

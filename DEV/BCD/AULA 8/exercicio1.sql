@@ -1,10 +1,10 @@
--- Active: 1788436126633@@127.0.0.1@3308@sesi_cr_ta
+-- Active: 1788436126633@@127.0.0.1@3308@smartcoffee_dml_sophia
 
 --cadastre dois novos clientes, cadastre uma nova categoria Especiais da Casa, insira um dos clientes cadastrados, use last_insert_id() para inserir pelo menos dois itens no pedido.
 
-DROP DATABASE IF EXISTS SMARTCOFEE_EXERCICIO_SOPHIA;
-CREATE DATABASE IF NOT EXISTS SMARTCOFEE_EXERCICIO_SOPHIA;
-USE SMARTCOFEE_EXERCICIO_SOPHIA;
+DROP DATABASE IF EXISTS smartcoffee_dml_sophia;
+CREATE DATABASE IF NOT EXISTS smartcoffee_dml_sophia;
+USE smartcoffee_dml_sophia;
 
 CREATE TABLE cliente (
     id_cliente INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,20 +50,34 @@ CREATE TABLE item_pedido (
     CONSTRAINT fk_item_produto FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
 );
 
-SELECT * FROM categoria;
 
 INSERT INTO cliente (nome, email, telefone, cidade) VALUES
 ('Ana Silva', 'ana.silva@email.com', '11999999999', 'São Paulo'),
 ('Pedro Santos', 'pedro.santos@email.com', NULL, 'Belo Horizonte'),
-('Julia Costa', 'julia.costa@email.com', '11666666666', 'Curitiba');
 
-INSERT INTO categoria (nome) VALUES
-('Cafe'), ('Bebidas Quentes'), ('Bebidas Frias'), ('Doces'), ('Salgados'), ('Combo');
 
-UPDATE categoria SET nome = 'Especiais da Casa' WHERE id_categoria = 7;
 
-INSERT INTO pedido (id_cliente, data_pedido, status_pedido, valor_total) VALUES 
-(1, '2026-09-14 10:00:00', 'ABERTO', 10.00),
-(2, '2026-09-14 11:00:00', 'PREPARANDO', 6.00);
 
-UPDATE 
+INSERT INTO produto (nome, descricao, preco, id_categoria) VALUES 
+('Café Trufado', 'Café espresso', 14.50, 1),
+('Cappuccino de Nutella', 'Cappuccino cremoso', 12.00, 1);
+
+
+INSERT INTO pedido (id_cliente, valor_total, status_pedido) 
+VALUES (3, 26.50, 'ABERTO');
+
+
+INSERT INTO item_pedido (id_pedido, id_produto, quantidade, preco_unitario, observacao) VALUES 
+(LAST_INSERT_ID(), 1, 1, 14.50, 'Sem açúcar'),
+(LAST_INSERT_ID(), 2, 1, 12.00, 'Bem quente');
+
+SELECT * FROM cliente;
+SELECT * FROM categoria;
+SELECT * FROM produto;
+SELECT * FROM pedido;
+SELECT * FROM item_pedido;
+
+
+
+--Parte B
+--Corrija o telefone de um dos clientes criados, altere a cidade e telefone de outro cliente em um unico comando, aumente em 8% os preços dos produtos da categoria criada, altere o status do novo

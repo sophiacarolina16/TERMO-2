@@ -59,14 +59,13 @@ INSERT INTO cliente (nome, email, telefone, cidade) VALUES
 ('Julia Costa', 'julia.costa@email.com', '21988888888', 'Rio de Janeiro'), 
 ('Carlos Souza', 'carlos.souza@email.com', '31977777777', 'Belo Horizonte'); -- julia carlos novo
 
-INSERT INTO categoria (nome) VALUES ('bebida quente'), ('bebida gelada'), ('salgado'), ('doces'),('Especiais da Casa');
+INSERT INTO categoria (id_categoria,nome) VALUES (1,'Especiais da Casa');
 
-
-INSERT INTO produto (nome, descricao, id_categoria, preco) VALUES 
-('Capuchino', 'Café com leite vaporizado e espuma de leite', 1, 5.00),
-('Soda Italiana de Maca verde', 'Agua gaseificada com licor de maca verde', 2, 10.00),
-('Pao de queijo', 'Pao de queijo tradicional', 3, 7.00),
-('Tapioca romeu e julieta', 'Tapioca com recheio de goiabada e queijo', 4, 10.00);
+@categoria_especial = SELECT id_categoria FROM categoria WHERE nome = 'Especiais da Casa');
+INSERT INTO produto (nome, preco, ativo, id_categoria) VALUES
+('Milkshake de Caramelo', 13.50, TRUE, 1),
+('torta Holandesa', 14.90, TRUE, 1),
+('Soda Italiana', 10.00, TRUE, 2);
 
 
 INSERT INTO pedido (id_cliente, valor_total, status_pedido) 
@@ -115,5 +114,11 @@ INSERT INTO categoria (nome) VALUES ('Categoria Temporaria');
 
 DELETE FROM categoria WHERE nome = 'Categoria Temporaria';
 
+--Parte D
+--Tente inserir um produto usando uma categoria inexistente, tente cadastrar um cliente usando um e-mail que ja existe, tente criar um pedido para um cliente inexistente, para cada erro, identifique qual restrição foi responsavel
 
+
+
+--Parte E
+--Inicie uma transação,cadastre um cliente,um pedido e dois itens relacionados, consulte os dados criados atraves do JOIN, execute ROLLBACK e prove com SELECT que os novos registros foram desfeitos, repita o proceso e finzalize com COMMMIT
 

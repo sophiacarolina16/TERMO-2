@@ -61,7 +61,7 @@ INSERT INTO cliente (nome, email, telefone, cidade) VALUES
 
 INSERT INTO categoria (id_categoria,nome) VALUES (1,'Especiais da Casa');
 
-@categoria_especial = SELECT id_categoria FROM categoria WHERE nome = 'Especiais da Casa');
+@categoria_especial = SELECT id_categoria FROM categoria WHERE nome = 'Especiais da Casa';
 INSERT INTO produto (nome, preco, ativo, id_categoria) VALUES
 ('Milkshake de Caramelo', 13.50, TRUE, 1),
 ('torta Holandesa', 14.90, TRUE, 1),

@@ -1,0 +1,20 @@
+[
+  {
+    "codigo": 101,
+    "nome": "Parafusadeira",
+    "setor": "producao",
+    "operacional": true
+  },
+  {
+    "codigo": 102,
+    "nome": "parafusadeira",
+    "setor": "producao",
+    "operacional": true
+  },
+  {
+    "codigo": 103,
+    "nome": "parafusadeira",
+    "setor": "producao",
+    "operacional": false
+  }
+]

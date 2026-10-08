@@ -95,9 +95,17 @@ INSERT INTO categoria (nome) VALUES
 
 INSERT INTO produto (nome, descricao, id_categoria, preco, ativo) VALUES 
 ('Capuchino', 'Café com leite vaporizado e espuma de leite', 1, 5.00, TRUE),
+('Café Expresso', 'Café puro, concentrado e tirado na hora', 1, 4.00, TRUE),
+('Mocaccino', 'Café espresso, leite vaporizado, calda de chocolate e chantilly', 1, 8.50, TRUE),
 ('Chocolate Quente', 'Chocolate quente com leite e canela', 2, 6.00, TRUE),
-('Pão de queijo', 'Pão de queijo tradicional', 5, 7.00, TRUE),
-('Tapioca romeu e julieta', 'Tapioca com recheio de goiabada e queijo', 4, 10.00, FALSE);
+('Soda Italiana de Maçã Verde', 'Bebida refrescante com xarope artesanal e água com gás', 3, 9.00, TRUE),
+('Suco Natural de Laranja', 'Suco 100% natural, espremido na hora (500ml)', 3, 7.50, TRUE),
+('Slice Cake de Cenoura', 'Fatia de bolo de cenoura com cobertura de brigadeiro', 4, 9.50, TRUE),
+('Tapioca Romeu e Julieta', 'Tapioca com recheio de goiabada e queijo', 4, 10.00, FALSE),
+('Pão de Queijo', 'Pão de queijo tradicional mineiro', 5, 7.00, TRUE),
+('Croissant de Presunto e Queijo', 'Massa folhada artesanal recheada com presunto e queijo', 5, 8.50, TRUE),
+('Combo Matinal', 'Café expresso + pão de queijo', 6, 9.50, TRUE);
+
 
 
 INSERT INTO pedido (id_cliente, data_pedido, status_pedido, valor_total) VALUES 

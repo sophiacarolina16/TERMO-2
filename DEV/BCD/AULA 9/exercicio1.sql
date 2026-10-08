@@ -260,3 +260,14 @@ SELECT cidade, COUNT(*) AS QTDE_CLIENTES
 FROM cliente
 GROUP BY cidade
 HAVING COUNT(*) >=2;
+
+--EX 17: ORDEM DE CRIACAO DE UMA CONSULTA COMPLETA
+
+
+SELECT colunas
+FROM tabela
+WHERE condicao
+GROUP BY colunas_agrupar
+HAVING condicao_agrupar
+ORDER BY colunas
+LIMIT quantidade;

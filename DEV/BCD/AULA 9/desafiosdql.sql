@@ -17,15 +17,13 @@ SELECT nome, cidade, email
 FROM cliente;
 
 -- 3. Liste os nomes das cidades sem repetir valores.
-
-SELECT cidade, COUNT(*) AS Quantidade_Clientes
-FROM cliente
-GROUP BY cidade;
+SELECT DISTINCT cidade FROM cliente
 
 -- 4. Liste todos os produtos em ordem crescente de preço.
 SELECT nome, preco
 FROM produto 
 ORDER BY preco ASC
+
 
 -- 5. Mostre apenas os 5 produtos mais caros.
 SELECT nome, preco
@@ -39,26 +37,28 @@ LIMIT 5;
 SELECT nome, preco 
 FROM produto
 WHERE preco >= 8.00 AND preco <= 15.00
+--Da pra usar Between tambem
 
 -- 7. Liste os clientes das cidades Limeira ou Americana.
 SELECT nome, cidade
 FROM cliente
 WHERE cidade = 'Limeira' OR cidade = 'Americana';
+--da pra usar IN(limeira,americana) tambem
 
 -- 8. Localize os produtos cujo nome contém a palavra “Café”.
 SELECT nome 
 FROM produto
-WHERE nome LIKE 'cafe%';
+WHERE nome LIKE '%cafe%';
 
 -- 9. Liste os clientes que não informaram telefone.
-SELECT nome, telefone
+SELECT nome, COALESCE(telefone, 'Não informado')
 FROM cliente
 WHERE telefone IS NULL;
 
 -- 10. Mostre os pedidos FINALIZADOS com valor acima de R$ 20,00,
 --     do maior para o menor valor.
 SELECT * FROM pedido 
-WHERE status_pedido = 'FINALIZADO' 
+WHERE status = 'FINALIZADO' 
 AND valor_total > 20.00
 ORDER BY valor_total DESC;
 
@@ -70,7 +70,7 @@ FROM produto;
 
 -- 12. Mostre menor preço, maior preço e preço médio dos produtos.
 SELECT 
-MIN(preco) AS Menor_Preco, MAX(preco) AS Maior_Preco, AVG(preco) AS Preco_Medio FROM produto;
+MIN(preco) AS Menor_Preco, MAX(preco) AS Maior_Preco, ROUND(AVG(preco),2) AS Preco_Medio FROM produto;
 
 -- 13. Informe quantos clientes existem em cada cidade.
 SELECT cidade, COUNT(*) AS Quantidade_Clientes

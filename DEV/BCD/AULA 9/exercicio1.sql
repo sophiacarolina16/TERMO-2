@@ -229,6 +229,8 @@ SELECT COUNT(*) AS TOTAL_CLIENTES
 FROM cliente;
 --CONTAR QUANTOS CLIENTES EXISTEM
 
+select round(avg(preco), 2) as media_precos from produto;
+
 SELECT AVG(preco) AS MEDIA_PRECOS
 FROM produto;
 

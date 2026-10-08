@@ -218,3 +218,45 @@ FROM pedido;
 
 SELECT nome, COALESCE(telefone, 'não informado') AS telefone FROM cliente;
 
+--EX 14: FUNCOES DE AGRUPAMENTO
+--COUNT - CONTAR QUANTOS REGISROS EXISTEM
+-- SUM - SOMA DE VALORES
+-- AVG - MEDIA DE VALORES
+-- MIN - MENOR VALOR
+-- MAX - MAIOR VALOR
+
+SELECT COUNT(*) AS TOTAL_CLIENTES
+FROM cliente;
+--CONTAR QUANTOS CLIENTES EXISTEM
+
+SELECT AVG(preco) AS MEDIA_PRECOS
+FROM produto;
+
+--calcular media de produtos
+
+SELECT MIN(preco) AS MENOR_PRECO, MAX(preco) AS MAIOR_PRECO, AVG(preco) AS MEDIA_PRECO
+FROM produto;
+--RESUMO DE PRECOS
+
+SELECT SUM(valor_total) AS Faturamento_Mensal 
+FROM pedido 
+WHERE status = 'FINALIZADO'
+
+
+--EX 15: GROUP BY - AGRUPAR DADOS
+
+SELECT cidade, COUNT(*) AS Quantidade_Clientes
+FROM cliente
+GROUP BY cidade;
+
+SELECT id_categoria, COUNT(*)AS Quantidade_Produtos FROM produto GROUP BY id_categoria;
+
+--EX 16: HAVING - FILTRO POR GRUPOS
+-- WHERE - FILTRA LINHAS ANTES DO AGROUP BY
+-- HAVING- FILTRA DEPOIS DO AGROUP BY
+
+
+SELECT cidade, COUNT(*) AS QTDE_CLIENTES
+FROM cliente
+GROUP BY cidade
+HAVING COUNT(*) >=2;

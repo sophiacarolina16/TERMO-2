@@ -67,8 +67,6 @@ COMMIT;
 START TRANSACTION;
 
 -- 14. Crie pedido para cliente 1 e salve o id em @novo_pedido.
-
-select*from pedido;
 INSERT INTO pedido (data_pedido,valor_total, status_pedido,id_cliente) VALUES (NOW(),15.00, 'aberto', 1);
 SET @novo_pedido = LAST_INSERT_ID();
 -- 15. Insira dois itens válidos.
@@ -78,13 +76,16 @@ VALUES (@novo_pedido, 1, 1, (SELECT preco FROM produto WHERE id_produto = 1));
 INSERT INTO item_pedido (id_pedido, id_produto, quantidade, preco_unitario) 
 VALUES (@novo_pedido, 2, 1, (SELECT preco FROM produto WHERE id_produto = 2));
 -- 16. Registre pagamento válido.
-
+INSERT INTO pagamento (id_pedido, valor, forma_pagamento, status_pagamento) 
+VALUES (@novo_pedido, 25.00, 'CARTÃO', 'APROVADO');
 -- 17. Consulte pedido, itens e pagamento.
-
+SELECT * FROM pedido WHERE id_pedido = @novo_pedido;
+SELECT * FROM item_pedido WHERE id_pedido = @novo_pedido;
+SELECT * FROM pagamento WHERE id_pedido = @novo_pedido;
 -- 18. COMMIT.
-
+COMMIT;
 -- 19. START TRANSACTION e crie pedido para cliente 2.
-
+START TRANSACTION;
 -- 20. Salve o id em @pedido_com_erro.
 
 -- 21. Tente inserir item com id_produto inexistente.
